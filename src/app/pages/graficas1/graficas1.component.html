@@ -1,3 +1,68 @@
-<p>
-  graficas1 works!
-</p>
+<div class="row">
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">{{graficos.grafico1.leyenda}}</h4>
+                <div style="display: block">
+                    <app-grafico-dona
+                        [labeld]="graficos.grafico1.labels"
+                        [datad]="graficos.grafico1.data"
+                        [typed]="graficos.grafico1.type"
+                    >
+                    </app-grafico-dona>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">{{graficos.grafico2.leyenda}}</h4>
+                <div style="display: block">
+                    <app-grafico-dona
+                        [labeld]="graficos.grafico2.labels"
+                        [datad]="graficos.grafico2.data"
+                        [typed]="graficos.grafico2.type"
+                    >
+                    </app-grafico-dona>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{graficos.grafico3.leyenda}}</h4>
+                    <div style="display: block">
+                        <app-grafico-dona
+                            [labeld]="graficos.grafico3.labels"
+                            [datad]="graficos.grafico3.data"
+                            [typed]="graficos.grafico3.type"
+                        >
+                        </app-grafico-dona>
+                        </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{graficos.grafico4.leyenda}}</h4>
+                    <div style="display: block">
+                        <app-grafico-dona
+                            [labeld]="graficos.grafico4.labels"
+                            [datad]="graficos.grafico4.data"
+                            [typed]="graficos.grafico4.type"
+                        >
+                        </app-grafico-dona>
+                        </div>
+                </div>
+            </div>
+    </div>
+</div>
