@@ -11,7 +11,9 @@ import { PagesModule } from './pages/pages.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register/register.component';
-import { SharedModule } from './shared/shared.module';
+
+// Servicios
+import { ServiceModule } from './services/service.module';
 
 // Temporal
 import { FormsModule } from '@angular/forms';
@@ -25,9 +27,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     PagesModule,
-    SharedModule,
     FormsModule,
-    APP_ROUTES
+    APP_ROUTES,
+    ServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
