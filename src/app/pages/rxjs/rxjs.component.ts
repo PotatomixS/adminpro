@@ -39,12 +39,11 @@ export class RxjsComponent implements OnInit, OnDestroy {
         const salida = {
           valor: contador
         };
-
         observer.next(salida);
 
         if (contador === 3) {
-          clearInterval(intervalo);
-          observer.complete();
+        clearInterval(intervalo);
+         observer.complete();
         }
 
         // if ( contador===2 ) {
@@ -53,7 +52,7 @@ export class RxjsComponent implements OnInit, OnDestroy {
         // }
       }, 1000);
     }).pipe(
-      map(resp => resp.valor), // ?
+      map((resp:any) => resp.valor ), // se supone que resp[0] es resp.valor
       filter((valor, index) => {
         if (valor % 2 === 1) {
           //impar
