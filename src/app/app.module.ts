@@ -10,7 +10,7 @@ import { PagesModule } from './pages/pages.module';
 // Componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './login/register/register.component';
+import { LoginmComponent } from './loginm/loginm.component';
 
 // Servicios
 import { ServiceModule } from './services/service.module';
@@ -22,7 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    LoginmComponent
   ],
   imports: [
     BrowserModule,

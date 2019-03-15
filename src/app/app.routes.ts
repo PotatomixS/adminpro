@@ -1,12 +1,12 @@
 import { RouterModule,Routes } from "@angular/router";
 
 import { LoginComponent } from "./login/login.component";
-import { RegisterComponent } from './login/register/register.component';
+import { LoginmComponent } from "./loginm/loginm.component";
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
-    { path: 'register', component: RegisterComponent},
+    { path: 'loginm', component: LoginmComponent},
     { path: '**', component: NopagefoundComponent}
 ];
 

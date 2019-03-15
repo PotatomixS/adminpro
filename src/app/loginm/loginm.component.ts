@@ -8,10 +8,10 @@ declare function init_plugins();
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
+  templateUrl: './loginm.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginmComponent implements OnInit {
 
   email: string;
   recuerdame: boolean = false;
@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
     }
 
     let usuario = {
-      "tarjeta_sanitaria": forma.value.tarjeta_sanitaria,
-      "password": forma.value.password
+      tarjeta_sanitaria: forma.value.tarjeta_sanitaria,
+      password: forma.value.password
     };
 
      this._usuarioService.login( usuario, forma.value.recuerdame)

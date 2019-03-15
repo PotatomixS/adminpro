@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario.model';
-import { HttpClient } from '@angular/common/http';
+import { Paciente } from 'src/app/models/usuario.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
 
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  usuario: Usuario;
+  nombre: Paciente;
   token: string;
 
   constructor(
@@ -29,76 +30,62 @@ export class UsuarioService {
 
     if ( localStorage.getItem('token')){
       this.token = localStorage.getItem('token');
-      this.usuario = JSON.parse(localStorage.getItem('usuario'));
+      this.nombre = JSON.parse(localStorage.getItem('nombre'));
     } else {
       this.token='';
-      this.usuario=null;
+      this.nombre=null;
     }
   }
 
-  guardarStorage( id: string, token: string, usuario: Usuario ) {
+  guardarStorage( tarjeta_sanitaria: string, token: string, nombre: Paciente ) {
 
-    localStorage.setItem('id',id);
+    localStorage.setItem('tarjeta_sanitaria',tarjeta_sanitaria);
     localStorage.setItem('token',token);
-    localStorage.setItem('usuario', JSON.stringify(usuario));
+    localStorage.setItem('nombre', JSON.stringify(nombre));
 
-    this.usuario = usuario;
+    this.nombre = nombre;
     this.token = token;
   }
 
   logout() {
-    this.usuario = null;
+    this.nombre = null;
     this.token = '';
 
     localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
+    localStorage.removeItem('nombre');
 
     this.router.navigate(['/login']);
   }
 
-  loginGoogle( token: string ){
+  login( usuario: any, recuerdame:boolean ){
+    if( recuerdame ){
+       localStorage.setItem( 'tarjeta_sanitaria', usuario.tarjeta_sanitaria );
+     }
+     else{
+       localStorage.removeItem('tarjeta_sanitaria');
+    }
+    let url = URL_SERVICIOS + '/login/paciente';
 
-    let url = URL_SERVICIOS + '/login/google';
+    let head = new HttpHeaders().set('Accept', 'application/json');
 
-    return this.http.post( url, {token})
+
+    return this.http.post ( url, usuario , {headers:head})
             .map( (resp:any) => {
-              this.guardarStorage( resp.id, resp.token, resp.usuario );
+              console.log(resp);
+              this.guardarStorage( resp.paciente.tarjeta_sanitaria,resp.token, resp.paciente.nombre );
               return true;
             });
   }
 
-  login( usuario: Usuario, recuerdame:boolean ){
-    // Comentado temporalmente
-    // if( recordar ){
-    //   localStorage.setItem( 'email', usuario.email );
-    // }
-    // else{
-    //   localStorage.removeItem('email');
-    // }
-    // Fin comentado temporalmente
+  crearUsuario( usuario: Paciente ){
+     let url = URL_SERVICIOS + '/paciente';
 
-    let url = URL_SERVICIOS + '/login';
-    return this.http.post ( url, usuario)
-            .map( (resp:any) => {
+     return this.http.post( url, usuario )
+           .map( (resp: any) => {
 
-              this.guardarStorage( resp.id, resp.token, resp.usuario );
-
-              return true;
-            });
-  }
-
-  crearUsuario( usuario: Usuario ){
-  // Comentado temporalmente
-  //   let url = URL_SERVICIOS + '/usuario';
-
-  //   return this.http.post( url, usuario )
-  //         .map( (resp: any) => {
-
-  //           swal('Usuario creado', usuario.email, 'success')
-  //           return resp.usuario;
-  //         });
-  // Fin comentado temporalmente
-  return usuario; // temporal por Comentado temporalmente
+             swal('Usuario creado', resp.paciente.nombre, 'success')
+             return resp.nombre;
+           });
   }
 
 }
