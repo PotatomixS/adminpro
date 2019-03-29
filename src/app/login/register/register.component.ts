@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import swal from 'sweetalert';
 import { UsuarioService } from '../../services/service.index';
-import { Usuario } from 'src/app/models/usuario.model';
+import { Paciente } from 'src/app/models/usuario.model';
 import { Router } from '@angular/router';
 
 declare function init_plugins();
@@ -69,10 +69,15 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    let usuario = new Usuario(
+    let usuario = new Paciente(
       this.forma.value.nombre,
-      this.forma.value.correo,
-      this.forma.value.password
+      this.forma.value.apellido,
+      this.forma.value.password,
+      this.forma.value.dni,
+      this.forma.value.email,
+      this.forma.value.telefono,
+      this.forma.value.direccion,
+      this.forma.value.tarjeta_sanitaria
     );
 
     // this._usuarioService.crearUsuario( usuario )

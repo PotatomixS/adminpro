@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
+import { jqxCalendarComponent } from 'node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxcalendar';
 
 // Modulos importados
 import { SharedModule } from '../shared/shared.module';
@@ -19,6 +20,7 @@ import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.co
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         GraficoDonaComponent,
         AccountSettingsComponent,
         PromesasComponent,
-        RxjsComponent
+        RxjsComponent,
+        jqxCalendarComponent
     ],
     exports: [
         DashboardComponent,
@@ -42,7 +45,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
             SharedModule,
             FormsModule,
             PAGES_ROUTES,
-            ChartsModule
+            ChartsModule,
+            CommonModule
     ]
 })
 export class PagesModule { }

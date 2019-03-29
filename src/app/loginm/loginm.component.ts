@@ -7,7 +7,7 @@ import { UsuarioService } from '../services/service.index';
 declare function init_plugins();
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-loginm',
   templateUrl: './loginm.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -37,11 +37,11 @@ export class LoginmComponent implements OnInit {
     }
 
     let usuario = {
-      tarjeta_sanitaria: forma.value.tarjeta_sanitaria,
+      usuario: forma.value.usuario,
       password: forma.value.password
     };
 
-     this._usuarioService.login( usuario, forma.value.recuerdame)
+     this._usuarioService.loginm( usuario, forma.value.recuerdame)
            .subscribe( correcto => this.router.navigate(['/dashboard']));
 
     //this.router.navigate(['/dashboard']);

@@ -12,7 +12,7 @@ import swal from 'sweetalert';
 })
 export class UsuarioService {
 
-  nombre: Paciente;
+  nombre: string;
   token: string;
 
   constructor(
@@ -30,18 +30,20 @@ export class UsuarioService {
 
     if ( localStorage.getItem('token')){
       this.token = localStorage.getItem('token');
-      this.nombre = JSON.parse(localStorage.getItem('nombre'));
+      this.nombre = localStorage.getItem('nombre');
     } else {
       this.token='';
       this.nombre=null;
     }
   }
 
-  guardarStorage( tarjeta_sanitaria: string, token: string, nombre: Paciente ) {
+  guardarStorage( tarjeta_sanitaria: string, token: string, nombre: string, rol: string, id:string ) {
 
     localStorage.setItem('tarjeta_sanitaria',tarjeta_sanitaria);
     localStorage.setItem('token',token);
-    localStorage.setItem('nombre', JSON.stringify(nombre));
+    localStorage.setItem('nombre', nombre);
+    localStorage.setItem('rol', rol);
+    localStorage.setItem('id', id);
 
     this.nombre = nombre;
     this.token = token;
@@ -71,8 +73,26 @@ export class UsuarioService {
 
     return this.http.post ( url, usuario , {headers:head})
             .map( (resp:any) => {
-              console.log(resp);
-              this.guardarStorage( resp.paciente.tarjeta_sanitaria,resp.token, resp.paciente.nombre );
+              this.guardarStorage( resp.paciente.tarjeta_sanitaria,resp.token, resp.paciente.nombre, "paciente",resp.paciente._id);
+              return true;
+            });
+  }
+
+  loginm( medico: any, recuerdame:boolean ){
+    if( recuerdame ){
+       localStorage.setItem( 'usuario', medico.usuario );
+     }
+     else{
+       localStorage.removeItem('usuario');
+    }
+    let url = URL_SERVICIOS + '/login/medico';
+
+    let head = new HttpHeaders().set('Accept', 'application/json');
+
+
+    return this.http.post ( url, medico , {headers:head})
+            .map( (resp:any) => {
+              this.guardarStorage( '',resp.token, resp.medico.usuario, resp.medico.especialidad,resp.medico._id);
               return true;
             });
   }

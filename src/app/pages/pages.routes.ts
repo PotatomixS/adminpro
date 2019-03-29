@@ -16,7 +16,7 @@ const pagesRoutes: Routes = [
         component: PagesComponent,
         canActivate: [ LoginGuardGuard ],
         children: [
-            { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' } },
+            { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Calendario' } },
             { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress' } },
             { path: 'graficas1', component: Graficas1Component, data: { titulo: 'Gráficas' } },
             { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
