@@ -41,4 +41,33 @@ export class DateService {
             });
   }
 
+  recogerMedicos(){
+    let url = URL_SERVICIOS + '/pacienteMedico/'+this.id; //id,especialidad,fecha
+    //let head = new HttpHeaders().set('Accept', 'application/json');
+    // head.append('token', this.token);
+    return this.http.get ( url )
+            .map( (resp:any) => {
+              return resp;
+            });
+  }
+
+  //TODO: hacer consulta
+  crearConsulta(fecha:string,id_medico:string, hora:string, especialidad:string){
+    let consulta = {
+      "id_medico": id_medico,
+      "id_paciente": this.id,
+      "fecha": fecha+" "+hora,
+      "descripcion_paciente": "Descripción del paciente",
+      "diagnostico_medico": "Diagnóstico médico",
+      "especialidad": especialidad
+
+    };
+    let url = URL_SERVICIOS + '/consulta'; //id,especialidad,fecha
+    //let head = new HttpHeaders().set('Accept', 'application/json');
+    // head.append('token', this.token);
+    return this.http.post ( url, consulta )
+            .map( (resp:any) => {
+              return resp;
+            });
+  }
 }
