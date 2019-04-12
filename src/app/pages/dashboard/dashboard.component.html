@@ -1,6 +1,7 @@
 <!-- Combobox con los roles del medico -->
 <!-- Evento al clickar el dia de mostrar horas disponibles enviando 
   id paciente, especialidad medico y fecha -->
+<div *ngIf="tipoUsuario === 'paciente'">
   <h2>Médico:</h2>
   <SELECT NAME="selCombo" SIZE=1> 
     <OPTION *ngFor="let item of medicos" (click)="cambiarMedico( item )">{{item.especialidad}}</OPTION>
@@ -19,4 +20,5 @@
       <td (click)="seleccionarHora( item )">{{item}}</td>
     </tr>
   </table>
+</div>
 </div>

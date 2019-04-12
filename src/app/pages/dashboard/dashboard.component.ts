@@ -3,6 +3,9 @@ import { jqxCalendarComponent } from 'node_modules/jqwidgets-scripts/jqwidgets-t
 import { DateService } from 'src/app/services/service.index';
 import { Router } from '@angular/router';
 import swal from "sweetalert";
+
+declare function init_plugins();
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,6 +13,7 @@ import swal from "sweetalert";
 })
 export class DashboardComponent implements OnInit,AfterViewInit {
   @ViewChild('myCalendar') myCalendar: jqxCalendarComponent;
+  tipoUsuario:string = localStorage.getItem("rol");
   medicoSeleccionado:string;
   fechaSeleccionada:string;
   horaSeleccionada:string;
@@ -43,7 +47,7 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit() {
-
+    init_plugins();
     this.cambiarMedico("Cabecera");
     this.fechaSeleccionada="";
   }
@@ -63,9 +67,12 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   }
 
   seleccionarHora( evt:any ){
-    this.horaSeleccionada=evt;
+    if (confirm("¿Quieres coger "+evt+" como hora de la consulta?")) {
+      this.horaSeleccionada=evt;
     this._dateService.crearConsulta(this.fechaSeleccionada,this.medicos[0].id, this.horaSeleccionada, this.medicos[0].especialidad)
     .subscribe();
+    swal("Consulta", "Consulta realizada correctamente", "success");
+    }
   }
 
   cambiarMedico(evt:any){

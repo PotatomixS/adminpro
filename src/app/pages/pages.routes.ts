@@ -9,6 +9,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/service.index';
+import { CrearPacienteComponent } from './crear-paciente/crear-paciente.component';
+import { CrearMedicoComponent } from './crear-medico/crear-medico.component';
 
 const pagesRoutes: Routes = [
     { 
@@ -22,6 +24,8 @@ const pagesRoutes: Routes = [
             { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
             { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Rxjs' } },
             { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Ajustes del tema' } },
+            { path: 'crearPaciente', component: CrearPacienteComponent, data: { titulo: 'Crear Paciente' } },
+            { path: 'crearMedico', component: CrearMedicoComponent, data: { titulo: 'Crear Médico' } },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
         ]
     }

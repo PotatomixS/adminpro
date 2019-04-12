@@ -18,14 +18,14 @@ export class SidebarService {
         ]
       }
     ];
-    else if(localStorage.getItem("rol")=="administrador")
+    else if(localStorage.getItem("admin"))
     this.menu = [
       {
         titulo: 'Principal',
         icono: 'mdi mdi-gauge',
         submenu: [
-          { titulo: 'Crear paciente',url: '/crearpaciente'},
-          { titulo: 'Crear medico',url: '/crearmedico'},
+          { titulo: 'Crear paciente',url: '/crearPaciente'},
+          { titulo: 'Crear medico',url: '/crearMedico'},
           //TODO: BRF Eliminar consulta opcional
           { titulo: 'Eliminar consulta',url: '/eliminarconsulta'}
         ]

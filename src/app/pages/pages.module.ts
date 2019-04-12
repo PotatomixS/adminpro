@@ -21,6 +21,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { CommonModule } from '@angular/common';
+import { CrearPacienteComponent } from './crear-paciente/crear-paciente.component';
+import { CrearMedicoComponent } from './crear-medico/crear-medico.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { CommonModule } from '@angular/common';
         AccountSettingsComponent,
         PromesasComponent,
         RxjsComponent,
-        jqxCalendarComponent
+        jqxCalendarComponent,
+        CrearPacienteComponent,
+        CrearMedicoComponent
     ],
     exports: [
         DashboardComponent,

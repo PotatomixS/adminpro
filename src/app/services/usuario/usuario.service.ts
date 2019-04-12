@@ -14,6 +14,7 @@ export class UsuarioService {
 
   nombre: string;
   token: string;
+  rol: string;
 
   constructor(
     public http: HttpClient,
@@ -37,24 +38,26 @@ export class UsuarioService {
     }
   }
 
-  guardarStorage( tarjeta_sanitaria: string, token: string, nombre: string, rol: string, id:string ) {
+  guardarStorage( tarjeta_sanitaria: string, token: string, nombre: string, rol: string, id:string, admin?:string ) {
 
     localStorage.setItem('tarjeta_sanitaria',tarjeta_sanitaria);
     localStorage.setItem('token',token);
     localStorage.setItem('nombre', nombre);
     localStorage.setItem('rol', rol);
     localStorage.setItem('id', id);
+    localStorage.setItem('admin', admin);
 
     this.nombre = nombre;
+    this.rol = rol;
     this.token = token;
   }
 
   logout() {
     this.nombre = null;
     this.token = '';
-
-    localStorage.removeItem('token');
-    localStorage.removeItem('nombre');
+    this.rol = '';
+    
+    localStorage.clear()
 
     this.router.navigate(['/login']);
   }
@@ -92,7 +95,7 @@ export class UsuarioService {
 
     return this.http.post ( url, medico , {headers:head})
             .map( (resp:any) => {
-              this.guardarStorage( '',resp.token, resp.medico.usuario, resp.medico.especialidad,resp.medico._id);
+              this.guardarStorage( '',resp.token, resp.medico.usuario, resp.medico.especialidad,resp.medico._id,resp.medico.rol);
               return true;
             });
   }
