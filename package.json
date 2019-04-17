@@ -21,6 +21,7 @@
     "@angular/router": "~7.2.0",
     "chart.js": "^2.7.3",
     "core-js": "^2.5.4",
+    "jqwidgets-scripts": "^7.1.0",
     "ng2-charts": "^1.6.0",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.4.0",

@@ -3,8 +3,9 @@
   id paciente, especialidad medico y fecha -->
 <div *ngIf="tipoUsuario === 'paciente'">
   <h2>Médico:</h2>
-  <SELECT NAME="selCombo" SIZE=1> 
-    <OPTION *ngFor="let item of medicos" (click)="cambiarMedico( item )">{{item.especialidad}}</OPTION>
+  <SELECT (change)="cambiarMedico($event.target.value)"> 
+    <OPTION>Ninguno</OPTION>
+    <OPTION *ngFor="let item of medicos">{{item.especialidad}}</OPTION>
   </SELECT>
     
 <hr>
@@ -14,7 +15,7 @@
   </jqxCalendar>
 </div>
 <h3>Pedir a las:</h3>
-<div *ngIf="fechaSeleccionada" style="width:25%;height:300px;overflow:scroll">
+<div style="width:25%;height:300px;overflow:scroll">
   <table>
     <tr class="clickable-row" *ngFor="let item of horas; let i = index">
       <td (click)="seleccionarHora( item )">{{item}}</td>
