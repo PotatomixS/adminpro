@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CrearUsuarioService } from 'src/app/services/service.index';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-paciente',
@@ -7,10 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearPacienteComponent implements OnInit {
 
-  constructor() { }
+  especialidades:any;
+  constructor(
+    private _crearUsuarioService:CrearUsuarioService
+  ) { }
 
   ngOnInit() {
-
+    this._crearUsuarioService.recogerEspecialidades().subscribe(resp => {
+      this.especialidades=resp.medicos
+      console.log(this.especialidades)});
   }
 
+  ingresar( forma: NgForm){
+    if ( forma.invalid ){
+      return;
+    }
+    let usuario = {
+      "nombre": forma.value.nombre,
+      "apellido": forma.value.apellido,
+      "password": forma.value.password,
+      "dni": forma.value.dni,
+      "email": forma.value.email,
+      "telefono": forma.value.telefono,
+      "direccion": forma.value.direccion
+    };
+     this._crearUsuarioService.crearPaciente( usuario )
+           .subscribe();
+
+    //this.router.navigate(['/dashboard']);
+  }
 }

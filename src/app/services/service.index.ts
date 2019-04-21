@@ -1,6 +1,9 @@
+
 export { LoginGuardGuard } from './guards/login-guard.guard';
 export { UsuarioService } from './usuario/usuario.service';
 export { DateService } from './usuario/date.service';
 export { SettingsService } from './settings/settings.service';
 export { SharedService } from './shared/shared.service';
 export { SidebarService } from './shared/sidebar.service';
+export { ConsultasPacienteService } from './usuario/consultas-paciente.service';
+export { CrearUsuarioService } from './usuario/crear-usuario.service';

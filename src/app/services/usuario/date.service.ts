@@ -52,12 +52,12 @@ export class DateService {
   }
 
   //TODO: hacer consulta
-  crearConsulta(fecha:string,id_medico:string, hora:string, especialidad:string){
+  crearConsulta(fecha:string,id_medico:string, hora:string, especialidad:string, comentario_paciente:string){
     let consulta = {
       "id_medico": id_medico,
       "id_paciente": this.id,
       "fecha": fecha+" "+hora,
-      "descripcion_paciente": "Descripción del paciente",
+      "descripcion_paciente": comentario_paciente,
       "diagnostico_medico": "Diagnóstico médico",
       "especialidad": especialidad
 

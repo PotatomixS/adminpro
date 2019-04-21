@@ -1,0 +1,9 @@
+<ul class="list-group list-group-flush" width="100%">
+    <li *ngFor="let item of consultas" class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">        {{item.especialidad}}</h5>
+            <small>{{item.fecha | date:'fullDate'}}</small>
+        </div>
+        <p class="mb-1">{{item.descripcion_paciente}}</p>
+    </li>
+</ul>

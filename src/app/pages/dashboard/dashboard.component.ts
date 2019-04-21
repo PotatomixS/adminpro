@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { jqxCalendarComponent } from 'node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxcalendar';
-import { DateService } from 'src/app/services/service.index';
+import { DateService, ConsultasPacienteService } from 'src/app/services/service.index';
 import { Router } from '@angular/router';
 import swal from "sweetalert";
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -26,6 +25,7 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   constructor(
     public router: Router,
     public _dateService: DateService,
+    public _ConsultasPacienteService: ConsultasPacienteService,
     private cdr: ChangeDetectorRef,
   ){
   }
@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit,AfterViewInit {
             this.setHora(horas)
           }
         );
-      //this.router.navigate(['/dashboard']);
+      //this.router.navigate(['/dashboard']); 
     }else{
       this.setHora([]);
     }
@@ -97,12 +97,29 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   }
 
   seleccionarHora( evt:any ){
-    if (confirm("¿Quieres coger "+evt+" como hora de la consulta?")) {
-      this.horaSeleccionada=evt;
-    this._dateService.crearConsulta(this.fechaSeleccionada,this.medicos[0].id, this.horaSeleccionada, this.medicos[0].especialidad)
-    .subscribe();
-    swal("Consulta", "Consulta realizada correctamente", "success");
-    }
+    this._ConsultasPacienteService.recogerConsultas()
+        .subscribe( (resp:any) => 
+          {
+            let existe = false;
+            for(let i=0;i<resp.consultas.length;i++){
+              if(resp.consultas[i].especialidad===this.medicoSeleccionado)
+              {
+                existe=true;
+              }
+            }
+            if(!existe){
+              if (confirm("¿Quieres coger "+evt+" como hora de la consulta?")) {
+                let comentario_paciente = prompt("Por favor diga brevemente el motivo de su consulta:");
+                this.horaSeleccionada=evt;
+                this._dateService.crearConsulta(this.fechaSeleccionada,this.medicos[0].id, this.horaSeleccionada, this.medicos[0].especialidad,comentario_paciente)
+                .subscribe();
+                swal("Consulta", "Consulta realizada correctamente", "success");
+              }
+            }
+            else
+            swal("Consulta", "Ya existe una consulta con este médico", "error");
+          }
+        );
   }
 
   cambiarMedico(medico:string="Ninguno"){
