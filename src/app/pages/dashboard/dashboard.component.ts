@@ -45,15 +45,31 @@ export class DashboardComponent implements OnInit,AfterViewInit {
       this._dateService.pedirHoras(date.getDate(), (date.getMonth()+1), date.getFullYear(), this.medicoSeleccionado)
         .subscribe((resp:any) =>
           {
+            let date = new Date(resp.fechasOcupadas[0]);
             horasOcupadas=resp.fechasOcupadas;
             let horas=[];
             if(horasOcupadas[0])
             {
               let count=0;
               for(let i=0;i<horAux.length;i++){
-                let str = horasOcupadas[count];
-                let siguiente = str.substr((str.indexOf('T')+1),5);
+                // let str = horasOcupadas[count];
+                // let siguiente = str.substr((str.indexOf('T')+1),5);
 
+                let date = new Date(horasOcupadas[count]);
+                let hrs = date.getHours();
+                let siguiente:string;
+                if(hrs<10){
+                  siguiente="0"+hrs+":";
+                }else{
+                  siguiente=""+hrs+":";
+                }
+                let mns = date.getMinutes();
+                if(mns<10){
+                  siguiente+="0"+mns;
+                }else{
+                  siguiente+=""+mns;
+                }
+                console.log(siguiente);
                 if(horAux[i]===siguiente)
                 {count++;}
                 else

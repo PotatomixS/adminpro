@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
 import { CrearPacienteComponent } from './crear-paciente/crear-paciente.component';
 import { CrearMedicoComponent } from './crear-medico/crear-medico.component';
 import { VerConsultasClienteComponent } from './ver-consultas-cliente/ver-consultas-cliente.component';
-
+import { VerConsultasMedicoComponent } from './ver-consultas-medico/ver-consultas-medico.component';
 @NgModule({
     declarations: [
         PagesComponent,
@@ -31,7 +31,8 @@ import { VerConsultasClienteComponent } from './ver-consultas-cliente/ver-consul
         jqxCalendarComponent,
         CrearPacienteComponent,
         CrearMedicoComponent,
-        VerConsultasClienteComponent
+        VerConsultasClienteComponent,
+        VerConsultasMedicoComponent
     ],
     exports: [
         DashboardComponent,

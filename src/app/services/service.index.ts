@@ -6,4 +6,5 @@ export { SettingsService } from './settings/settings.service';
 export { SharedService } from './shared/shared.service';
 export { SidebarService } from './shared/sidebar.service';
 export { ConsultasPacienteService } from './usuario/consultas-paciente.service';
+export { ConsultasMedicoService } from './usuario/consultas-medico.service';
 export { CrearUsuarioService } from './usuario/crear-usuario.service';

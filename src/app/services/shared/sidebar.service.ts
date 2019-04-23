@@ -18,7 +18,7 @@ export class SidebarService {
         ]
       }
     ];
-    else if(localStorage.getItem("admin"))
+    else if(localStorage.getItem("admin")==="Administrador")
     this.menu = [
       {
         titulo: 'Principal',

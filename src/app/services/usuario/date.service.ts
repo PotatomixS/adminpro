@@ -32,7 +32,7 @@ export class DateService {
 
 
   pedirHoras( dia: number, mes: number, ano:number, rolMedico: string ){
-    let url = URL_SERVICIOS + '/consulta/horasdisponibles/'+this.id+"/"+rolMedico+"/"+ano+"-"+mes+"-"+dia; //id,especialidad,fecha
+    let url = URL_SERVICIOS + '/consulta/horasdisponibles/'+this.id+"/"+rolMedico+"/"+ano+"-"+mes+"-"+dia+'?token='+localStorage.getItem('token'); //id,especialidad,fecha
     //let head = new HttpHeaders().set('Accept', 'application/json');
     // head.append('token', this.token);
     return this.http.get ( url )
@@ -42,7 +42,7 @@ export class DateService {
   }
 
   recogerMedicos(){
-    let url = URL_SERVICIOS + '/pacienteMedico/'+this.id; //id,especialidad,fecha
+    let url = URL_SERVICIOS + '/pacienteMedico/'+this.id+'?token='+localStorage.getItem('token'); //id,especialidad,fecha
     //let head = new HttpHeaders().set('Accept', 'application/json');
     // head.append('token', this.token);
     return this.http.get ( url )
@@ -62,7 +62,7 @@ export class DateService {
       "especialidad": especialidad
 
     };
-    let url = URL_SERVICIOS + '/consulta'; //id,especialidad,fecha
+    let url = URL_SERVICIOS + '/consulta'+'?token='+localStorage.getItem('token'); //id,especialidad,fecha
     //let head = new HttpHeaders().set('Accept', 'application/json');
     // head.append('token', this.token);
     return this.http.post ( url, consulta )

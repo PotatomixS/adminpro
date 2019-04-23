@@ -1,0 +1,125 @@
+<div *ngIf="!seleccionado">
+    <ul class="list-group" width="100%">
+            <li *ngFor="let item of consultas" class="list-group-item list-group-item-action" (click)="seleccionar(item)">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{item.id_paciente.nombre}} {{item.id_paciente.apellido}}</h5>
+                    <small>{{item.fecha | date:'medium'}}</small>
+                </div>
+                <p class="mb-1">{{item.descripcion_paciente}}</p>
+            </li>
+        </ul>
+</div>
+<div *ngIf="seleccionado">
+    <button type="button" class="btn btn-primary" (click)="volver()">Volver</button><br>
+    <div class="accordion" id="datos">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Datos del paciente
+                  </button>
+                </h2>
+              </div>
+          
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>Nombre:</th>
+                                <td>{{itemSeleccionado.id_paciente.nombre}}</td>
+                                <th>Apellido:</th>
+                                <td>{{itemSeleccionado.id_paciente.apellido}}</td>
+                            </tr>
+                            <tr>
+                                <th>Dirección:</th>
+                                <td colspan="3">{{itemSeleccionado.id_paciente.direccion}}</td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td colspan="3">{{itemSeleccionado.id_paciente.email}}</td>
+                            </tr>
+                            <tr>
+                                <th>Teléfono:</th>
+                                <td colspan="3">{{itemSeleccionado.id_paciente.telefono}}</td>
+                            </tr>
+                            <tr>
+                                <th>Tarjeta sanitaria:</th>
+                                <td colspan="3">{{itemSeleccionado.id_paciente.tarjeta_sanitaria}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Datos de la consulta
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>Fecha:</th>
+                                <td colspan="3">{{itemSeleccionado.fecha | date:'medium'}}</td>
+                            </tr>
+                            <tr>
+                                <th>Motivo:</th>
+                                <td colspan="3">{{itemSeleccionado.descripcion_paciente}}</td>
+                            </tr>
+                            <tr>
+                                <th>Estado:</th>
+                                <td colspan="3">{{itemSeleccionado.estado}}</td>
+                            </tr>
+                        </tbody>
+                    </table>  
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Modificar consulta
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                    <form ngNativeValidate #f="ngForm" (ngSubmit)="actualizarConsulta( f )">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th>Observaciones:</th>
+                                    <td colspan="3"><textarea [ngModel]="diagnostico_medico" name="diagnostico_medico" class="form-control" id="Diagnostico_medico" [placeholder]="itemSeleccionado.diagnostico_medico"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>Estado:</th>
+                                    <td colspan="3">
+                                        <div class="form-group col-md-4">
+                                                <label for="inputState">Estado</label>
+                                                <select [ngModel]="estado" name="estado" class="form-control" id="Estado">
+                                                    <option>Pendiente</option>
+                                                    <option>Terminada</option>
+                                                    <option>Cancelada</option>
+                                                </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td><button type="submit" class="btn btn-primary">Guardar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+</div>

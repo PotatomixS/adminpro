@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
-
+//
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
@@ -21,7 +21,7 @@ export class CrearUsuarioService {
   crearMedico( usuario: any ){
     let head = new HttpHeaders().set('Accept', 'application/json');
     
-    let url = URL_SERVICIOS + '/medico';
+    let url = URL_SERVICIOS + '/medico'+'?token='+localStorage.getItem('token');
 
       return this.http.post( url, usuario, {headers:head} )
             .map( (resp: any) => {
@@ -34,18 +34,17 @@ export class CrearUsuarioService {
   crearPaciente( usuario: any ){
     let head = new HttpHeaders().set('Accept', 'application/json');
     
-    let url = URL_SERVICIOS + '/paciente';
+    let url = URL_SERVICIOS + '/paciente'+'?token='+localStorage.getItem('token');
 
       return this.http.post( url, usuario, {headers:head} )
             .map( (resp: any) => {
-              console.log(resp);
               swal('Paciente creado', "usuario: " + usuario.nombre + "\ntarjeta sanitaria: " + resp.paciente.tarjeta_sanitaria, 'success')
               return true;
             });
   }
 
   recogerEspecialidades(){
-    let url = URL_SERVICIOS +  '/medico/especialidades';
+    let url = URL_SERVICIOS +  '/medico/especialidades'+'?token='+localStorage.getItem('token');
     return this.http.get( url )
            .map( (resp: any) => {
              return resp;

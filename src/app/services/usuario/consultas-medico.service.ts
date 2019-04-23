@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Paciente } from 'src/app/models/usuario.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
 
@@ -10,7 +9,7 @@ import swal from 'sweetalert';
 @Injectable({
   providedIn: 'root'
 })
-export class ConsultasPacienteService {
+export class ConsultasMedicoService {
 
   id:string;
 
@@ -31,12 +30,23 @@ export class ConsultasPacienteService {
   }
 
   recogerConsultas( ){
-    let url = URL_SERVICIOS + '/consulta/paciente/'+this.id+'/Pendiente'+'?token='+localStorage.getItem('token');
+    let url = URL_SERVICIOS + '/consulta/medico/'+this.id+'/'+localStorage.getItem('rol')+'/Pendiente'+'?token='+localStorage.getItem('token');
 
     let head = new HttpHeaders().set('Accept', 'application/json');
 
 
     return this.http.get ( url )
+            .map( (resp:any) => {
+              return resp;
+            });
+  }
+
+  //TODO: No va el put para medicos
+  editarConsulta( consulta:any ){
+    let url = URL_SERVICIOS + '/consulta/'+consulta._id+'/?token='+localStorage.getItem('token');
+
+    let head = new HttpHeaders().set('Accept', 'application/json');
+    return this.http.put ( url, consulta, {headers:head} )
             .map( (resp:any) => {
               return resp;
             });

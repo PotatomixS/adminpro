@@ -101,7 +101,7 @@ export class UsuarioService {
   }
 
   crearUsuario( usuario: Paciente ){
-     let url = URL_SERVICIOS + '/paciente';
+     let url = URL_SERVICIOS + '/paciente'+'?token='+localStorage.getItem('token');
 
      return this.http.post( url, usuario )
            .map( (resp: any) => {
