@@ -40,7 +40,7 @@ export class UsuarioService {
     }
   }
 
-  public guardarStorage( tarjeta_sanitaria: string, token: string, nombre: string, apellido:string, rol: string, id:string, telefono:string, email:string, direccion:string, baja:string, dni:string, admin?:string, nombrem?:string ) {
+  public guardarStorage( tarjeta_sanitaria: string, token: string, nombre: string, apellido:string, rol: string, id:string, telefono:string, email:string, direccion:string, baja:string, dni:string, img:string, admin?:string, nombrem?:string ) {
 
     localStorage.setItem('tarjeta_sanitaria',tarjeta_sanitaria);
     localStorage.setItem('token',token);
@@ -53,6 +53,7 @@ export class UsuarioService {
     localStorage.setItem('direccion', direccion);
     localStorage.setItem('dni', dni);
     localStorage.setItem('baja', baja);
+    localStorage.setItem('img', img);
     localStorage.setItem('admin', admin);
     localStorage.setItem('nombrem', nombrem);
     localStorage.setItem("reload","yes");
@@ -85,8 +86,23 @@ export class UsuarioService {
 
 
     return this.http.post ( url, usuario , {headers:head})
+    
             .map( (resp:any) => {
-              this.guardarStorage( resp.paciente.tarjeta_sanitaria,resp.token, resp.paciente.nombre, resp.paciente.apellido, "paciente",resp.paciente._id,resp.paciente.telefono,resp.paciente.email,resp.paciente.direccion,resp.paciente.baja,resp.paciente.dni);
+              if(!resp.token)
+                swal('Login error', 'Usuario o contraseña incorrectos', 'error')
+              this.guardarStorage(
+                resp.paciente.tarjeta_sanitaria,
+                resp.token,
+                resp.paciente.nombre,
+                resp.paciente.apellido,
+                "paciente",
+                resp.paciente._id,
+                resp.paciente.telefono,
+                resp.paciente.email,
+                resp.paciente.direccion,
+                resp.paciente.baja,
+                resp.paciente.dni,
+                resp.paciente.img);
               return true;
             });
   }
@@ -105,7 +121,23 @@ export class UsuarioService {
 
     return this.http.post ( url, medico , {headers:head})
             .map( (resp:any) => {
-              this.guardarStorage( '',resp.token, resp.medico.usuario, resp.medico.apellido, resp.medico.especialidad,resp.medico._id,resp.medico.telefono,resp.medico.email,resp.medico.direccion,resp.medico.baja,"",resp.medico.rol,resp.medico.nombre);
+              if(!resp.token)
+                swal('Login error', 'Usuario o contraseña incorrectos', 'error')
+              this.guardarStorage(
+                '',
+                resp.token,
+                resp.medico.usuario,
+                resp.medico.apellido,
+                resp.medico.especialidad,
+                resp.medico._id,
+                resp.medico.telefono,
+                resp.medico.email,
+                resp.medico.direccion,
+                resp.medico.baja,
+                "",
+                resp.medico.img,
+                resp.medico.rol,
+                resp.medico.nombre);
               return true;
             });
   }
@@ -119,6 +151,16 @@ export class UsuarioService {
              swal('Usuario creado', resp.paciente.nombre, 'success')
              return resp.nombre;
            });
+  }
+
+  baja(tipo,id){
+    let url = URL_SERVICIOS + '/'+tipo+'/baja/'+id+'?token='+localStorage.getItem('token');
+     return this.http.put( url, {})
+           .map( (resp: any) =>
+            {
+              swal('Baja', 'Se ha dado de baja correctamente', 'success');
+            }
+           );
   }
 
   // cambiarImagen( archivo: File, id: string ){

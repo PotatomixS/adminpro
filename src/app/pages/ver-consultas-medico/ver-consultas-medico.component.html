@@ -1,4 +1,7 @@
 <div *ngIf="!seleccionado">
+    <button (click)="cambiarConsultas('Pendiente')" class="btn btn-primary">Pendientes</button>
+    <button (click)="cambiarConsultas('Cancelada')" class="btn btn-primary">Cancelada</button>
+    <button (click)="cambiarConsultas('Terminada')" class="btn btn-primary">Terminada</button>
     <ul class="list-group" width="100%">
             <li *ngFor="let item of consultas" class="list-group-item list-group-item-action" (click)="seleccionar(item)">
                 <div class="d-flex w-100 justify-content-between">

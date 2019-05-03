@@ -21,11 +21,10 @@ export class VerConsultasMedicoComponent implements OnInit{
 
     }
     ngOnInit(){
-        this._ConsultasMedicoService.recogerConsultas()
+        this._ConsultasMedicoService.recogerConsultas('Pendiente')
             .subscribe((resp:any) =>
             {
                 this.consultas=resp.consultas;
-                console.log(this.consultas);
             })
     }
 
@@ -46,4 +45,13 @@ export class VerConsultasMedicoComponent implements OnInit{
                .subscribe();
         //this.router.navigate(['/dashboard']);
       }
+    
+    cambiarConsultas(tipo:string){
+        this._ConsultasMedicoService.recogerConsultas(tipo)
+            .subscribe((resp:any) =>
+            {
+                this.consultas=resp.consultas;
+            })
+        this.cdr.detectChanges();
+    }
 }

@@ -9,3 +9,4 @@ export { ConsultasMedicoService } from './usuario/consultas-medico.service';
 export { CrearUsuarioService } from './usuario/crear-usuario.service';
 export { PerfilService } from './usuario/perfil.service';
 export { SubirArchivoService } from './subir-archivo/subir-archivo.service';
+export { ConsultasAdminService } from './usuario/consultas-admin.service';

@@ -19,8 +19,10 @@ export class PerfilComponent implements OnInit {
   rol: string;
   dni: string;
   password: any;
-
+  img: string;
+  
   imagenSubir: File;
+  imagenUrl: string;
 
   constructor(
     private _subirArchivoService: SubirArchivoService,
@@ -34,6 +36,7 @@ export class PerfilComponent implements OnInit {
     this.apellido=localStorage.getItem("apellido");
     this.correo=localStorage.getItem("email");
     this.telefono=localStorage.getItem("telefono");
+    this.img=localStorage.getItem("img");
     if(localStorage.getItem("rol")==="paciente")
     {
       this.esPaciente=true;
@@ -54,6 +57,10 @@ export class PerfilComponent implements OnInit {
   ingresar( forma: NgForm){
     if(forma.value.password === forma.value.cpassword)
     {
+      let pass=forma.value.password;
+      if(!forma.value.password){
+        pass=' ';
+      }
       if(this.esPaciente)
       {
         //this._usuarioService.cambiarImagen( this.imagenSubir, localStorage.getItem("id"));
@@ -61,15 +68,16 @@ export class PerfilComponent implements OnInit {
         let usuario = {
           "nombre": this.nombre,
           "apellido": this.apellido,
-          "password": forma.value.password,
+          "password": pass,
           "dni": this.dni,
           "email": forma.value.correo,
           "telefono": forma.value.telefono,
           "direccion": forma.value.direccion,
           "tarjeta_sanitaria": this.tarjeta_sanitaria,
-          "baja": "false"
+          "baja": "false",
+          "img": "uploads/pacientes/"+this.imagenUrl
         };
-        this._usuarioService.guardarStorage( usuario.tarjeta_sanitaria, localStorage.getItem("token"), usuario.nombre, usuario.apellido, "paciente", localStorage.getItem("id"), usuario.telefono, usuario.email, usuario.direccion, usuario.baja, usuario.dni );
+        this._usuarioService.guardarStorage( usuario.tarjeta_sanitaria, localStorage.getItem("token"), usuario.nombre, usuario.apellido, "paciente", localStorage.getItem("id"), usuario.telefono, usuario.email, usuario.direccion, usuario.baja, usuario.dni, usuario.img );
         this._subirArchivoService.subirArchivo( this.imagenSubir, "paciente", localStorage.getItem("id"), usuario);
         // this._perfilService.actualizarPaciente( usuario )
         //       .subscribe();
@@ -82,14 +90,15 @@ export class PerfilComponent implements OnInit {
           "nombre": this.nombre,
           "apellido": this.apellido,
           "rol": "Médico",
-          "password": forma.value.password,
+          "password": pass,
           "email": forma.value.correo,
           "telefono": forma.value.telefono,
           "especialidad": this.rol,
-          "baja": "false"
+          "baja": "false",
+          "img": "uploads/medicos/"+this.imagenUrl
           
         };
-        this._usuarioService.guardarStorage( '', localStorage.getItem("token"), usuario.usuario, usuario.apellido, usuario.especialidad, localStorage.getItem("id"), usuario.telefono, usuario.email, "", usuario.baja, "", usuario.rol, usuario.nombre );
+        this._usuarioService.guardarStorage( '', localStorage.getItem("token"), usuario.usuario, usuario.apellido, usuario.especialidad, localStorage.getItem("id"), usuario.telefono, usuario.email, "", usuario.baja, "", usuario.img, usuario.rol, usuario.nombre );
         this._subirArchivoService.subirArchivo( this.imagenSubir, "medico", localStorage.getItem("id"), usuario);
       }
     }
@@ -103,6 +112,12 @@ export class PerfilComponent implements OnInit {
     }
 
     this.imagenSubir = archivo;
+    this.imagenUrl = archivo.name;
+  }
 
+  darDeBaja(){
+    if (confirm("¿Está seguro de que quiere darse de baja?")) {
+      this._usuarioService.baja("medico",localStorage.getItem("id"));
+    }
   }
 }

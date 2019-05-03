@@ -25,7 +25,9 @@ export class SidebarService {
         icono: 'mdi mdi-gauge',
         submenu: [
           { titulo: 'Crear paciente',url: '/crearPaciente'},
-          { titulo: 'Crear medico',url: '/crearMedico'}
+          { titulo: 'Crear medico',url: '/crearMedico'},
+          { titulo: 'Dar de baja paciente',url: '/darbajapaciente'},
+          { titulo: 'Ver consultas',url: '/consultasadmin'}
         ]
       }
     ];

@@ -1,0 +1,9 @@
+<form ngNativeValidate #f="ngForm" (ngSubmit)="darDeBaja( f )">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="nombre">Nombre</label>
+      <input [ngModel]="dni" name="dni" class="form-control" type="text" required placeholder="DNI">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Dar de baja paciente</button>
+</form>

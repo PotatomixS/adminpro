@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   }
 
   seleccionarHora( evt:any ){
-    this._ConsultasPacienteService.recogerConsultas()
+    this._ConsultasPacienteService.recogerConsultas('Pendiente')
         .subscribe( (resp:any) => 
           {
             let existe = false;
@@ -131,8 +131,18 @@ export class DashboardComponent implements OnInit,AfterViewInit {
             if(!existe){
               if (confirm("¿Quieres coger "+evt+" como hora de la consulta?")) {
                 let comentario_paciente = prompt("Por favor diga brevemente el motivo de su consulta:");
+                let idMedico;
+                let eMedico;
                 this.horaSeleccionada=evt;
-                this._dateService.crearConsulta(this.fechaSeleccionada,this.medicos[0].id, this.horaSeleccionada, this.medicos[0].especialidad,comentario_paciente)
+                for(let i=0;i<this.medicos.length;i++){
+                  if(this.medicos[i].especialidad===this.medicoSeleccionado)
+                  {
+                    idMedico=this.medicos[i].id;
+                    eMedico=this.medicos[i].especialidad;
+                    break;
+                  }
+                }
+                this._dateService.crearConsulta(this.fechaSeleccionada,idMedico, this.horaSeleccionada, eMedico,comentario_paciente)
                 .subscribe();
                 swal("Consulta", "Consulta realizada correctamente", "success");
               }

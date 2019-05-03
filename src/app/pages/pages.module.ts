@@ -13,28 +13,28 @@ import { PAGES_ROUTES } from './pages.routes';
 import { ChartsModule } from 'ng2-charts';
 
 // temporal
-import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
-import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { CommonModule } from '@angular/common';
 import { CrearPacienteComponent } from './crear-paciente/crear-paciente.component';
 import { CrearMedicoComponent } from './crear-medico/crear-medico.component';
 import { VerConsultasClienteComponent } from './ver-consultas-cliente/ver-consultas-cliente.component';
 import { VerConsultasMedicoComponent } from './ver-consultas-medico/ver-consultas-medico.component';
+import { VerConsultasAdminComponent } from './ver-consultas-admin/ver-consultas-admin.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { DarBajaPacienteComponent } from './dar-baja-paciente/dar-baja-paciente.component';
 @NgModule({
     declarations: [
         PagesComponent,
         DashboardComponent,
-        IncrementadorComponent,
-        GraficoDonaComponent,
         AccountSettingsComponent,
         jqxCalendarComponent,
         CrearPacienteComponent,
         CrearMedicoComponent,
         VerConsultasClienteComponent,
         VerConsultasMedicoComponent,
-        PerfilComponent
+        VerConsultasAdminComponent,
+        PerfilComponent,
+        DarBajaPacienteComponent
     ],
     exports: [
         DashboardComponent,

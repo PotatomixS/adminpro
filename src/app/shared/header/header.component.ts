@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/service.index';
+import { URL_SERVICIOS } from 'src/app/config/config';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +8,12 @@ import { UsuarioService } from 'src/app/services/service.index';
   styles: []
 })
 export class HeaderComponent implements OnInit {
-
-  constructor( public _usuarioService: UsuarioService) { }
+  imagen:string;
+  constructor( public _usuarioService: UsuarioService) { 
+    this.imagen= URL_SERVICIOS+"/"+localStorage.getItem("img");
+  }
 
   ngOnInit() {
-    console.log(UsuarioService);
   }
 
 }

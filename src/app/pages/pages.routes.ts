@@ -9,7 +9,9 @@ import { CrearPacienteComponent } from './crear-paciente/crear-paciente.componen
 import { CrearMedicoComponent } from './crear-medico/crear-medico.component';
 import { VerConsultasClienteComponent } from './ver-consultas-cliente/ver-consultas-cliente.component';
 import { VerConsultasMedicoComponent } from './ver-consultas-medico/ver-consultas-medico.component';
+import { VerConsultasAdminComponent } from './ver-consultas-admin/ver-consultas-admin.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { DarBajaPacienteComponent } from './dar-baja-paciente/dar-baja-paciente.component';
 
 const pagesRoutes: Routes = [
     { 
@@ -23,6 +25,8 @@ const pagesRoutes: Routes = [
             { path: 'verconsultasm', component: VerConsultasMedicoComponent, data: { titulo: 'Ver consultas' } },
             { path: 'crearPaciente', component: CrearPacienteComponent, data: { titulo: 'Crear Paciente' } },
             { path: 'crearMedico', component: CrearMedicoComponent, data: { titulo: 'Crear Médico' } },
+            { path: 'darbajapaciente', component: DarBajaPacienteComponent, data: { titulo: 'Dar de baja paciente' } },
+            { path: 'consultasadmin', component: VerConsultasAdminComponent, data: { titulo: 'Consultas administrador' } },
             { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil' } },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
         ]

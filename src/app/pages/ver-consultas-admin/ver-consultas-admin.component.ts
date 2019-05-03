@@ -1,21 +1,20 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { ConsultasPacienteService } from 'src/app/services/service.index';
-
+import { ConsultasAdminService } from '../../services/service.index'
 @Component({
-  selector: 'app-ver-consultas-cliente',
-  templateUrl: './ver-consultas-cliente.component.html',
+  selector: 'app-ver-consultas-admin',
+  templateUrl: './ver-consultas-admin.component.html',
   styles: []
 })
-export class VerConsultasClienteComponent implements OnInit{
+export class VerConsultasAdminComponent implements OnInit{
     consultas:any;
     constructor(
-        public _ConsultasPacienteService: ConsultasPacienteService,
+        public _ConsultasAdminService: ConsultasAdminService,
         private cdr: ChangeDetectorRef
     ){
 
     }
     ngOnInit(){
-        this._ConsultasPacienteService.recogerConsultas('Pendiente')
+        this._ConsultasAdminService.recogerConsultas('Pendiente')
             .subscribe((resp:any) =>
             {
                 this.consultas=resp.consultas;
@@ -23,7 +22,7 @@ export class VerConsultasClienteComponent implements OnInit{
             })
     }
     cambiarConsultas(tipo:string){
-        this._ConsultasPacienteService.recogerConsultas(tipo)
+        this._ConsultasAdminService.recogerConsultas(tipo)
             .subscribe((resp:any) =>
             {
                 this.consultas=resp.consultas;

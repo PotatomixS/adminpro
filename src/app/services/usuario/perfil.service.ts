@@ -16,16 +16,6 @@ export class PerfilService {
     public http: HttpClient,
     public router: Router
   ) { 
-    this.cargarStorage();
-  }
-
-  cargarStorage() {
-
-    if ( localStorage.getItem('token')){
-      this.id = localStorage.getItem('id');
-    } else {
-      this.id='';
-    }
   }
 
   actualizarPaciente( paciente:any ){

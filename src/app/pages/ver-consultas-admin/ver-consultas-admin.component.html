@@ -1,5 +1,7 @@
 <button (click)="cambiarConsultas('Pendiente')" class="btn btn-primary">Pendientes</button>
 <button (click)="cambiarConsultas('Terminada')" class="btn btn-primary">Terminada</button>
+<button (click)="cambiarConsultas('Cancelada')" class="btn btn-primary">Canceladas</button>
+<button (click)="cambiarConsultas('No Asignada')" class="btn btn-primary">No Asignadas</button>
 <ul class="list-group list-group-flush" width="100%">
     <li *ngFor="let item of consultas" class="list-group-item">
         <div class="d-flex w-100 justify-content-between">

@@ -32,6 +32,7 @@ export class SubirArchivoService {
       formData.append( 'rol', datos.rol);
       formData.append( 'especialidad', datos.especialidad);
       }
+      console.log(archivo);
       if(archivo)
        formData.append( 'imagen', archivo, archivo.name );
   

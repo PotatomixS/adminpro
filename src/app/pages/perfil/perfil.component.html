@@ -62,6 +62,8 @@
           </div>
           <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
       </form>
+
+      <button *ngIf="!esPaciente" (click)="darDeBaja()" class="btn btn-info waves-effect waves-light m-r-10">Dar de baja</button>
     </div>
   </div>
 </div>

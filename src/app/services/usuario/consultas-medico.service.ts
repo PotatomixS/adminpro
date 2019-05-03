@@ -29,8 +29,8 @@ export class ConsultasMedicoService {
     }
   }
 
-  recogerConsultas( ){
-    let url = URL_SERVICIOS + '/consulta/medico/'+this.id+'/'+localStorage.getItem('rol')+'/Pendiente'+'?token='+localStorage.getItem('token');
+  recogerConsultas( tipo:string ){
+    let url = URL_SERVICIOS + '/consulta/medico/'+this.id+'/'+localStorage.getItem('rol')+'/'+tipo+'?token='+localStorage.getItem('token');
 
     let head = new HttpHeaders().set('Accept', 'application/json');
 
