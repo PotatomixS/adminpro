@@ -8,9 +8,10 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="user-profile">
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="../assets/images/users/profile.png" alt="user" /><span class="hide-menu">{{ _usuarioService.nombre }}</span></a>
+                            <!-- TODO: imagen -->
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="http://192.168.56.102:3000/uploads/pacientes/1556461775819.jpg" alt="user" /><span class="hide-menu">{{ _usuarioService.nombre }}</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="javascript:void()">Mi perfil </a></li>
+                                <li><a routerLinkActive="active" routerLink="{{'/perfil'}}">Mi perfil </a></li>
                                 <li><a routerLinkActive="active" routerLink="/account-settings">Opciones de cuenta</a></li>
                                 <li><a (click)="_usuarioService.logout()" class="pointer">Finalizar sesion</a></li>
                             </ul>

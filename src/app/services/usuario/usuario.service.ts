@@ -6,6 +6,7 @@ import { URL_SERVICIOS } from 'src/app/config/config';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
+import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class UsuarioService {
 
   constructor(
     public http: HttpClient,
-    public router: Router
+    public router: Router,
+    public _subirArchivoService: SubirArchivoService
   ) { 
     this.cargarStorage();
   }
@@ -38,14 +40,22 @@ export class UsuarioService {
     }
   }
 
-  guardarStorage( tarjeta_sanitaria: string, token: string, nombre: string, rol: string, id:string, admin?:string ) {
+  public guardarStorage( tarjeta_sanitaria: string, token: string, nombre: string, apellido:string, rol: string, id:string, telefono:string, email:string, direccion:string, baja:string, dni:string, admin?:string, nombrem?:string ) {
 
     localStorage.setItem('tarjeta_sanitaria',tarjeta_sanitaria);
     localStorage.setItem('token',token);
     localStorage.setItem('nombre', nombre);
+    localStorage.setItem('apellido', apellido);
     localStorage.setItem('rol', rol);
     localStorage.setItem('id', id);
+    localStorage.setItem('telefono', telefono);
+    localStorage.setItem('email', email);
+    localStorage.setItem('direccion', direccion);
+    localStorage.setItem('dni', dni);
+    localStorage.setItem('baja', baja);
     localStorage.setItem('admin', admin);
+    localStorage.setItem('nombrem', nombrem);
+    localStorage.setItem("reload","yes");
 
     this.nombre = nombre;
     this.rol = rol;
@@ -76,7 +86,7 @@ export class UsuarioService {
 
     return this.http.post ( url, usuario , {headers:head})
             .map( (resp:any) => {
-              this.guardarStorage( resp.paciente.tarjeta_sanitaria,resp.token, resp.paciente.nombre, "paciente",resp.paciente._id);
+              this.guardarStorage( resp.paciente.tarjeta_sanitaria,resp.token, resp.paciente.nombre, resp.paciente.apellido, "paciente",resp.paciente._id,resp.paciente.telefono,resp.paciente.email,resp.paciente.direccion,resp.paciente.baja,resp.paciente.dni);
               return true;
             });
   }
@@ -95,7 +105,7 @@ export class UsuarioService {
 
     return this.http.post ( url, medico , {headers:head})
             .map( (resp:any) => {
-              this.guardarStorage( '',resp.token, resp.medico.usuario, resp.medico.especialidad,resp.medico._id,resp.medico.rol);
+              this.guardarStorage( '',resp.token, resp.medico.usuario, resp.medico.apellido, resp.medico.especialidad,resp.medico._id,resp.medico.telefono,resp.medico.email,resp.medico.direccion,resp.medico.baja,"",resp.medico.rol,resp.medico.nombre);
               return true;
             });
   }
@@ -110,5 +120,15 @@ export class UsuarioService {
              return resp.nombre;
            });
   }
+
+  // cambiarImagen( archivo: File, id: string ){
+  //   this._subirArchivoService.subirArchivo( archivo, 'usuarios', id )
+  //     .then( resp=>{
+  //       console.log(resp);
+  //     })
+  //     .catch( resp=>{
+  //       console.log(resp);
+  //     });
+  // }
 
 }

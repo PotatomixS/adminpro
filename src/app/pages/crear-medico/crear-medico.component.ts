@@ -15,8 +15,7 @@ export class CrearMedicoComponent implements OnInit {
 
   ngOnInit() {
     this._crearUsuarioService.recogerEspecialidades().subscribe(resp => {
-      this.especialidades=resp.medicos
-      console.log(this.especialidades)});
+      this.especialidades=resp.medicos});
   }
 
   ingresar( forma: NgForm){

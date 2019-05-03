@@ -1,7 +1,9 @@
+// asd
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ConsultasMedicoService } from 'src/app/services/service.index';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-ver-consultas-medico',
   templateUrl: './ver-consultas-medico.component.html',
@@ -28,7 +30,6 @@ export class VerConsultasMedicoComponent implements OnInit{
     }
 
     seleccionar(item:any){
-        console.log(item);
         this.itemSeleccionado=item;
         this.seleccionado=true;
         this.cdr.detectChanges();
@@ -39,13 +40,10 @@ export class VerConsultasMedicoComponent implements OnInit{
     }
 
     actualizarConsulta( forma: NgForm){
-        if ( forma.invalid ){
-          return;
-        }
         this.itemSeleccionado.diagnostico_medico=forma.value.diagnostico_medico;
         this.itemSeleccionado.estado=forma.value.estado;
          this._ConsultasMedicoService.editarConsulta( this.itemSeleccionado )
-               .subscribe(resp => this.router.navigate(['/verconsultasm']));
+               .subscribe();
         //this.router.navigate(['/dashboard']);
       }
 }

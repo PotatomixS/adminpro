@@ -4,12 +4,11 @@ import { URL_SERVICIOS } from 'src/app/config/config';
 
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
-import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ConsultasMedicoService {
+export class PerfilService {
 
   id:string;
 
@@ -29,24 +28,19 @@ export class ConsultasMedicoService {
     }
   }
 
-  recogerConsultas( ){
-    let url = URL_SERVICIOS + '/consulta/medico/'+this.id+'/'+localStorage.getItem('rol')+'/Pendiente'+'?token='+localStorage.getItem('token');
-
+  actualizarPaciente( paciente:any ){
+    let url = URL_SERVICIOS + '/paciente/'+this.id+'?token='+localStorage.getItem('token');
     let head = new HttpHeaders().set('Accept', 'application/json');
-
-
-    return this.http.get ( url )
-            .map( (resp:any) => {
-              return resp;
-            });
-  }
-
-  editarConsulta( consulta:any ){
-    let url = URL_SERVICIOS + '/consulta/'+consulta._id+'?token='+localStorage.getItem('token');
-    let head = new HttpHeaders().set('Accept', 'application/json');
-    return this.http.put ( url, consulta, {headers:head} )
+    return this.http.put ( url, paciente, {headers:head} )
             .map( (resp:any) => {
             });
   }
 
+  actualizarMedico( medico:any ){
+    let url = URL_SERVICIOS + '/medico/'+this.id+'?token='+localStorage.getItem('token');
+    let head = new HttpHeaders().set('Accept', 'application/json');
+    return this.http.put ( url, medico, {headers:head} )
+            .map( (resp:any) => {
+            });
+  }
 }

@@ -21,6 +21,7 @@ import { CrearPacienteComponent } from './crear-paciente/crear-paciente.componen
 import { CrearMedicoComponent } from './crear-medico/crear-medico.component';
 import { VerConsultasClienteComponent } from './ver-consultas-cliente/ver-consultas-cliente.component';
 import { VerConsultasMedicoComponent } from './ver-consultas-medico/ver-consultas-medico.component';
+import { PerfilComponent } from './perfil/perfil.component';
 @NgModule({
     declarations: [
         PagesComponent,
@@ -32,7 +33,8 @@ import { VerConsultasMedicoComponent } from './ver-consultas-medico/ver-consulta
         CrearPacienteComponent,
         CrearMedicoComponent,
         VerConsultasClienteComponent,
-        VerConsultasMedicoComponent
+        VerConsultasMedicoComponent,
+        PerfilComponent
     ],
     exports: [
         DashboardComponent,

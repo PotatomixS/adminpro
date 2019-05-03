@@ -58,11 +58,11 @@
                                     <div class="u-img"><img src="assets/images/users/1.jpg" alt="user"></div>
                                     <div class="u-text">
                                         <h4>{{_usuarioService.nombre}}</h4>
-                                        <p class="text-muted">{{_usuarioService.rol}}</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                        <p class="text-muted">{{_usuarioService.rol}}</p><a routerLink="{{'/perfil'}}" class="btn btn-rounded btn-danger btn-sm">Perfil</a></div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-user"></i> Mi Perfil</a></li>
+                            <li><a routerLink="{{'/perfil'}}"><i class="ti-user"></i> Mi Perfil</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="ti-settings"></i>Opciones de cuenta</a></li>
                             <li role="separator" class="divider"></li>

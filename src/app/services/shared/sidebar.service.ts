@@ -25,9 +25,7 @@ export class SidebarService {
         icono: 'mdi mdi-gauge',
         submenu: [
           { titulo: 'Crear paciente',url: '/crearPaciente'},
-          { titulo: 'Crear medico',url: '/crearMedico'},
-          //TODO: BRF Eliminar consulta opcional
-          { titulo: 'Eliminar consulta',url: '/eliminarconsulta'}
+          { titulo: 'Crear medico',url: '/crearMedico'}
         ]
       }
     ];

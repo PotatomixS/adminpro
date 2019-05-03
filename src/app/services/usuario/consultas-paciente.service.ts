@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Paciente } from 'src/app/models/usuario.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
 

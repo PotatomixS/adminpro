@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit,AfterViewInit {
               let count=0;
               for(let i=0;i<horAux.length;i++){
                 // let str = horasOcupadas[count];
-                // let siguiente = str.substr((str.indexOf('T')+1),5);
+                // let siguiente = str.substr((str.indexOf('T')+1),5); 
 
                 let date = new Date(horasOcupadas[count]);
                 let hrs = date.getHours();
@@ -82,7 +82,7 @@ export class DashboardComponent implements OnInit,AfterViewInit {
             this.setHora(horas)
           }
         );
-      //this.router.navigate(['/dashboard']); 
+      //this.router.navigate(['/dashboard']);
     }else{
       this.setHora([]);
     }
@@ -96,6 +96,11 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   ngOnInit() {
     this.medicoSeleccionado="Ninguno";
     this.fechaSeleccionada="";
+    if(localStorage.getItem("reload")==="yes")
+    {
+      localStorage.setItem("reload","no");
+      location.reload();
+    }
   }
 
   ngAfterViewInit(){

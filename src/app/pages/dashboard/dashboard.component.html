@@ -1,6 +1,6 @@
 <!-- Combobox con los roles del medico -->
 <!-- Evento al clickar el dia de mostrar horas disponibles enviando 
-  id paciente, especialidad medico y fecha -->
+id paciente, especialidad medico y fecha  -->
 <div *ngIf="tipoUsuario === 'paciente'">
   <h2>Médico:</h2>
   <SELECT (change)="cambiarMedico($event.target.value)"> 

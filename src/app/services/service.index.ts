@@ -1,4 +1,3 @@
-
 export { LoginGuardGuard } from './guards/login-guard.guard';
 export { UsuarioService } from './usuario/usuario.service';
 export { DateService } from './usuario/date.service';
@@ -8,3 +7,5 @@ export { SidebarService } from './shared/sidebar.service';
 export { ConsultasPacienteService } from './usuario/consultas-paciente.service';
 export { ConsultasMedicoService } from './usuario/consultas-medico.service';
 export { CrearUsuarioService } from './usuario/crear-usuario.service';
+export { PerfilService } from './usuario/perfil.service';
+export { SubirArchivoService } from './subir-archivo/subir-archivo.service';

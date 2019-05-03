@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="card col-lg-4">
+    <div class="card-body">
+        <h4 class="card-title">Imagen</h4>
+        <img src="">
+        <input (change)="seleccionImage( $event.target.files[0] )" type="file">
+        <br>
+    </div>
+  </div>
+  <div class="card col-lg-8">
+    <div class="card-body">
+      <h4 class="card-title">Perfil del usuario</h4>
+      <form ngNativeValidate #f="ngForm" (ngSubmit)="ingresar( f )" class="form p-t-20">
+          <div *ngIf="!esPaciente" class="form-group">
+              <label for="exampleInputuname">Nombre de usuario</label>
+              <div class="input-group">
+                  <div class="input-group-addon"><i class="ti-user"></i></div>
+                  <input [ngModel]="usuario" name="usuario" class="form-control" type="text" required placeholder="Usuario">
+              </div>
+          </div>
+          <p>Nombre: {{nombre}} | Apellido: {{apellido}}</p>
+          <div *ngIf="esPaciente" class="form-group">
+            <p>Tarjeta Sanitaria: {{tarjeta_sanitaria}}</p>
+          </div>
+          <div *ngIf="!esPaciente" class="form-group">
+            <label for="exampleInputuname">Rol: {{rol}}</label>
+          </div>
+          <div class="form-group">
+              <label for="exampleInputEmail1">Correo electrónico</label>
+              <div class="input-group">
+                  <div class="input-group-addon"><i class="ti-email"></i></div>
+                  <input [ngModel]="correo" name="correo" class="form-control" type="email" required placeholder="Correo">
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="exampleInputEmail1">Telefono</label>
+              <div class="input-group">
+                  <div class="input-group-addon"><i class="ti-email"></i></div>
+                  <input [ngModel]="telefono" name="telefono" class="form-control" type="text" required placeholder="telefono">
+              </div>
+          </div>
+          <div *ngIf="esPaciente" class="form-group">
+              <label for="exampleInputEmail1">Direccion</label>
+              <div class="input-group">
+                  <div class="input-group-addon"><i class="ti-email"></i></div>
+                  <input [ngModel]="direccion" name="direccion" class="form-control" type="text" required placeholder="Direccion">
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="pwd1">Contraseña</label>
+              <div class="input-group">
+                  <div class="input-group-addon"><i class="ti-lock"></i></div>
+                  <input [ngModel]="password" name="password" class="form-control" type="password" placeholder="Contraseña">
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="pwd2">Confirmar Contraseña</label>
+              <div class="input-group">
+                  <div class="input-group-addon"><i class="ti-lock"></i></div>
+                  <input [ngModel]="cpassword" name="cpassword" class="form-control" type="password" placeholder="Contraseña">
+              </div>
+          </div>
+          <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
+      </form>
+    </div>
+  </div>
+</div>
