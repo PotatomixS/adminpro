@@ -85,26 +85,23 @@ export class UsuarioService {
     let head = new HttpHeaders().set('Accept', 'application/json');
 
 
-    return this.http.post ( url, usuario , {headers:head})
-    
-            .map( (resp:any) => {
-              if(!resp.token)
-                swal('Login error', 'Usuario o contraseña incorrectos', 'error')
-              this.guardarStorage(
-                resp.paciente.tarjeta_sanitaria,
-                resp.token,
-                resp.paciente.nombre,
-                resp.paciente.apellido,
-                "paciente",
-                resp.paciente._id,
-                resp.paciente.telefono,
-                resp.paciente.email,
-                resp.paciente.direccion,
-                resp.paciente.baja,
-                resp.paciente.dni,
-                resp.paciente.img);
-              return true;
-            });
+    return this.http
+          .post ( url, usuario , {headers:head})
+          .map( (resp:any) => {
+            this.guardarStorage(
+              resp.paciente.tarjeta_sanitaria,
+              resp.token,
+              resp.paciente.nombre,
+              resp.paciente.apellido,
+              "paciente",
+              resp.paciente._id,
+              resp.paciente.telefono,
+              resp.paciente.email,
+              resp.paciente.direccion,
+              resp.paciente.baja,
+              resp.paciente.dni,
+              resp.paciente.img);
+          });
   }
 
   loginm( medico: any, recuerdame:boolean ){
@@ -121,8 +118,6 @@ export class UsuarioService {
 
     return this.http.post ( url, medico , {headers:head})
             .map( (resp:any) => {
-              if(!resp.token)
-                swal('Login error', 'Usuario o contraseña incorrectos', 'error')
               this.guardarStorage(
                 '',
                 resp.token,
@@ -155,12 +150,14 @@ export class UsuarioService {
 
   baja(tipo,id){
     let url = URL_SERVICIOS + '/'+tipo+'/baja/'+id+'?token='+localStorage.getItem('token');
+    this.logout();
      return this.http.put( url, {})
            .map( (resp: any) =>
             {
-              swal('Baja', 'Se ha dado de baja correctamente', 'success');
             }
            );
+           
+           
   }
 
   // cambiarImagen( archivo: File, id: string ){

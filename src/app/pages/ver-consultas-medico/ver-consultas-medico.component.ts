@@ -42,8 +42,8 @@ export class VerConsultasMedicoComponent implements OnInit{
         this.itemSeleccionado.diagnostico_medico=forma.value.diagnostico_medico;
         this.itemSeleccionado.estado=forma.value.estado;
          this._ConsultasMedicoService.editarConsulta( this.itemSeleccionado )
-               .subscribe();
-        //this.router.navigate(['/dashboard']);
+               .subscribe(resp=>location.reload());
+        this.cdr.detectChanges();
       }
     
     cambiarConsultas(tipo:string){

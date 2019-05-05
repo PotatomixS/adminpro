@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PerfilService, UsuarioService, SubirArchivoService } from 'src/app/services/service.index';
+import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-perfil',
@@ -28,7 +30,8 @@ export class PerfilComponent implements OnInit {
     private _subirArchivoService: SubirArchivoService,
     private _usuarioService: UsuarioService,
     private _perfilService: PerfilService,
-    private cdr : ChangeDetectorRef
+    private cdr : ChangeDetectorRef,
+    private router: Router
   ) {
    }
 
@@ -77,11 +80,14 @@ export class PerfilComponent implements OnInit {
           "baja": "false",
           "img": "uploads/pacientes/"+this.imagenUrl
         };
+        if(!this.imagenUrl){
+          usuario.img="imagenDefecto.png"
+        }
         this._usuarioService.guardarStorage( usuario.tarjeta_sanitaria, localStorage.getItem("token"), usuario.nombre, usuario.apellido, "paciente", localStorage.getItem("id"), usuario.telefono, usuario.email, usuario.direccion, usuario.baja, usuario.dni, usuario.img );
         this._subirArchivoService.subirArchivo( this.imagenSubir, "paciente", localStorage.getItem("id"), usuario);
         // this._perfilService.actualizarPaciente( usuario )
         //       .subscribe();
-
+        this.cdr.detectChanges();
       }
       else
       {
@@ -96,10 +102,13 @@ export class PerfilComponent implements OnInit {
           "especialidad": this.rol,
           "baja": "false",
           "img": "uploads/medicos/"+this.imagenUrl
-          
         };
+        if(!this.imagenUrl){
+          usuario.img="imagenDefecto.png"
+        }
         this._usuarioService.guardarStorage( '', localStorage.getItem("token"), usuario.usuario, usuario.apellido, usuario.especialidad, localStorage.getItem("id"), usuario.telefono, usuario.email, "", usuario.baja, "", usuario.img, usuario.rol, usuario.nombre );
         this._subirArchivoService.subirArchivo( this.imagenSubir, "medico", localStorage.getItem("id"), usuario);
+        this.cdr.detectChanges();
       }
     }
     //this.router.navigate(['/dashboard']); 
@@ -117,7 +126,8 @@ export class PerfilComponent implements OnInit {
 
   darDeBaja(){
     if (confirm("¿Está seguro de que quiere darse de baja?")) {
-      this._usuarioService.baja("medico",localStorage.getItem("id"));
+      this._usuarioService.baja("medico",localStorage.getItem("id")).subscribe();
+      swal('Baja', 'Se ha dado de baja correctamente', 'success');
     }
   }
 }

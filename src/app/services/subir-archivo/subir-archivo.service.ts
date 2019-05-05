@@ -40,7 +40,13 @@ export class SubirArchivoService {
         if( xhr.readyState === 4 ) {
           if( xhr.status === 200 ) {
             swal('Listo', 'Datos editados correctamente', 'success');
+            let resp:any;
             resolve( JSON.parse( xhr.response ) );
+            if(archivo){
+              resp=JSON.parse( xhr.response );
+              localStorage.setItem("img",resp.medico.img);
+            }
+            setTimeout(function(){location.reload()},1000);
           } else {
             swal('Error', 'Los datos no pudieron editarse', 'error');
             reject( xhr.response );

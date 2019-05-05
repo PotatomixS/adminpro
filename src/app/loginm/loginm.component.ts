@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UsuarioService } from '../services/service.index';
+import swal from 'sweetalert';
 
 declare function init_plugins();
 
@@ -42,7 +43,10 @@ export class LoginmComponent implements OnInit {
     };
 
      this._usuarioService.loginm( usuario, forma.value.recuerdame)
-           .subscribe( correcto => this.router.navigate(['/dashboard']));
+           .subscribe( correcto => {this.router.navigate(['/dashboard'])
+          }, error => {  
+            swal('Error','El usuario y/o la contraseña no son correctos','error');  
+          });
 
     //this.router.navigate(['/dashboard']);
   }
