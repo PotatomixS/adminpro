@@ -150,10 +150,14 @@ export class UsuarioService {
 
   baja(tipo,id){
     let url = URL_SERVICIOS + '/'+tipo+'/baja/'+id+'?token='+localStorage.getItem('token');
-    this.logout();
+    if(tipo==="medico")
+      this.logout();
+     
      return this.http.put( url, {})
            .map( (resp: any) =>
             {
+              if(tipo==="paciente")
+                swal("Baja","El paciente ha sido dado de baja correctamente", "success")
             }
            );
            

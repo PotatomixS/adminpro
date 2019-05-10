@@ -30,13 +30,13 @@
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">Especialidad</label>
-      <select [ngModel]="especialidad" name="especialidad" class="form-control" id="Especialidad">
+      <select (change)="cambiarMedico($event.target.value)" name="especialidad" class="form-control" id="Especialidad">
         <option *ngFor="let item of especialidades">{{item}}</option>
       </select>
     </div>
     <div class="form-group col-md-4">
       <label for="inputZip">Rol</label>
-      <select [ngModel]="rol" name="rol" id="inputState" class="form-control" id="Rol">
+      <select (change)="cambiarRol($event.target.value)" name="rol" id="inputState" class="form-control" id="Rol">
         <option>Médico</option>
         <option>Administrador</option>
       </select>

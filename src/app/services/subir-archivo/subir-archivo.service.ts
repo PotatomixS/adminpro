@@ -44,6 +44,9 @@ export class SubirArchivoService {
             resolve( JSON.parse( xhr.response ) );
             if(archivo){
               resp=JSON.parse( xhr.response );
+              if(tipo==="paciente")
+              localStorage.setItem("img",resp.paciente.img);
+              else
               localStorage.setItem("img",resp.medico.img);
             }
             setTimeout(function(){location.reload()},1000);

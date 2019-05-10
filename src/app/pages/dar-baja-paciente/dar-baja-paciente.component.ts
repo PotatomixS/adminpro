@@ -15,6 +15,7 @@ export class DarBajaPacienteComponent implements OnInit {
 
   ngOnInit() {
   }
+  
   darDeBaja( forma: NgForm){
     if (confirm("¿Está seguro de que quiere dar este usuario de baja?")) {
       this._usuarioService.baja("paciente",forma.value.dni).subscribe();

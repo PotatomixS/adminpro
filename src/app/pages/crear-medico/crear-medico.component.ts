@@ -8,6 +8,8 @@ import { CrearUsuarioService } from 'src/app/services/service.index';
 })
 export class CrearMedicoComponent implements OnInit {
 
+  medicoSeleccionado:string="Médico de cabecera";
+  rolSeleccionado:string="Médico";
   especialidades:any;
   constructor(
     private _crearUsuarioService:CrearUsuarioService
@@ -29,8 +31,8 @@ export class CrearMedicoComponent implements OnInit {
       "password": forma.value.password,
       "email": forma.value.email,
       "telefono": forma.value.telefono,
-      "especialidad": forma.value.especialidad,
-      "rol": forma.value.rol
+      "especialidad": this.medicoSeleccionado,
+      "rol": this.rolSeleccionado
     };
      this._crearUsuarioService.crearMedico( usuario )
            .subscribe();
@@ -38,4 +40,11 @@ export class CrearMedicoComponent implements OnInit {
     //this.router.navigate(['/dashboard']);
   }
 
+  cambiarMedico(medico:string="Médico de cabecera"){
+    this.medicoSeleccionado=medico;
+  }
+
+  cambiarRol(rol:string="Médico"){
+    this.rolSeleccionado=rol;
+  }
 }
